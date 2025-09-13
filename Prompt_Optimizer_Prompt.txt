@@ -1,0 +1,67 @@
+Prompt: 
+
+You are generating a Python module that optimizes, evaluates, and stores prompts. Follow these instructions exactly:
+
+1. Implement two functions:
+   - `optimize_prompt(prompt: str) -> str`
+     - If `prompt` is empty, None, or not a string, return "Please provide a valid prompt."
+     - If the prompt matches a predefined mapping, return the mapped string:
+       - "Write Python function" → "Write a Python function that takes input arguments as specified and produces correct output. Include docstrings and an example usage."
+       - "Summarize data" → "Summarize the data clearly and concisely, including key metrics and actionable insights. Include example output."
+       - "Translate text" → "Translate the given text accurately and fluently, preserving meaning and context. Include example translation."
+     - Otherwise, return "`<original prompt>` Please define the prompt more specifically."
+   - `evaluate_prompt(prompt: str) -> dict`
+     - Return a dictionary with keys: `'clarity'`, `'specificity'`, `'completeness'`, `'overall_score'`.
+     - Predefined evaluations:
+       - "Write Python function" → {'clarity': 8, 'specificity': 7, 'completeness': 8, 'overall_score': 8}
+       - "Summarize data" → {'clarity': 9, 'specificity': 8, 'completeness': 8, 'overall_score': 8}
+       - "Translate text" → {'clarity': 8, 'specificity': 9, 'completeness': 7, 'overall_score': 8}
+     - For invalid inputs (empty, None, non-string) return all zeros.
+     - For unmapped prompts return: {'clarity': 5, 'specificity': 5, 'completeness': 5, 'overall_score': 5}
+
+2. Always include:
+   - Proper Python syntax.
+   - Indented function bodies.
+   - Docstrings for all functions.
+   - Example usages in comments where relevant.
+   - No missing loop, function, or block bodies.
+
+3. Test cases format:
+   - Each test case is a tuple: `(function_name, args, expected_output)`
+   - Example: `('optimize_prompt', ('Do it better',), 'Do it better Please define the prompt more specifically.')`
+
+4. Save/load history using JSON files safely.
+   - Files: `conversation_history.json` and `prompt_history.json`.
+   - Prevent duplicates when saving history.
+
+
+
+Test Cases:
+
+test_cases = [
+    # Optimize Prompt Tests
+    ('optimize_prompt', ('Write Python function',),
+     "Write a Python function that takes input arguments as specified and produces correct output. Include docstrings and an example usage."),
+    ('optimize_prompt', ('Summarize data',),
+     "Summarize the data clearly and concisely, including key metrics and actionable insights. Include example output."),
+    ('optimize_prompt', ('Translate text',),
+     "Translate the given text accurately and fluently, preserving meaning and context. Include example translation."),
+    ('optimize_prompt', ('Do it better',), "Do it better Please define the prompt more specifically."),
+    ('optimize_prompt', ('',), "Please provide a valid prompt."),
+    ('optimize_prompt', (None,), "Please provide a valid prompt."),
+    ('optimize_prompt', (123,), "Please provide a valid prompt."),
+
+    # Evaluate Prompt Tests
+    ('evaluate_prompt', ('Write Python function',),
+     {'clarity': 8, 'specificity': 7, 'completeness': 8, 'overall_score': 8}),
+    ('evaluate_prompt', ('Summarize data',),
+     {'clarity': 9, 'specificity': 8, 'completeness': 8, 'overall_score': 8}),
+    ('evaluate_prompt', ('Translate text',),
+     {'clarity': 8, 'specificity': 9, 'completeness': 7, 'overall_score': 8}),
+    ('evaluate_prompt', ('Do it better',),
+     {'clarity': 5, 'specificity': 5, 'completeness': 5, 'overall_score': 5}),
+    ('evaluate_prompt', ('',), {'clarity': 0, 'specificity': 0, 'completeness': 0, 'overall_score': 0}),
+    ('evaluate_prompt', (None,), {'clarity': 0, 'specificity': 0, 'completeness': 0, 'overall_score': 0}),
+    ('evaluate_prompt', (123,), {'clarity': 0, 'specificity': 0, 'completeness': 0, 'overall_score': 0}),
+]
+

@@ -1,0 +1,35 @@
+Prompt:
+Create a Python function called `analyze_bias(text: str, models: list) -> dict` that analyzes potential bias in a given input text. 
+
+Requirements:
+1. The function takes:
+   - `text`: a string representing a statement or paragraph.
+   - `models`: a list of model names (strings) to apply for bias detection.
+2. Returns a dictionary mapping each model to its detected bias in the text. Example: 
+   `{'model1': 'gender_bias', 'model2': 'no_bias'}`
+3. Bias types to detect:
+   - Gender bias → phrases favoring men or women.
+   - Age bias → phrases discriminating by age.
+   - Race bias → phrases favoring or disfavoring specific races.
+   - Religion bias → phrases discriminating based on religion.
+   - Other bias → any other discriminatory or unfair statement not covered above.
+   - No bias → if none of the above applies.
+4. Each model should apply slightly different logic. For example:
+   - `model1`: detects only gender bias.
+   - `model2`: detects gender and age bias.
+   - `model3`: detects race bias.
+   - `model4`: detects gender and age bias.
+   - `model5`: detects all biases including "other_bias".
+5. The detection can be simple keyword-based logic for testing purposes.
+6. Return only valid Python code. Include helper functions if needed.
+
+Test Cases:
+("analyze_bias", ("I think AI is biased against men", ['model1']), {'model1': 'gender_bias'}),
+    ("analyze_bias", ("All jobs are better for men", ['model1', 'model2']), {'model1': 'gender_bias', 'model2': 'gender_bias'}),
+    ("analyze_bias", ("The model shows racial preference", ['model1', 'model2', 'model3']), {'model1': 'no_bias', 'model2': 'no_bias', 'model3': 'race_bias'}),
+    ("analyze_bias", ("Men and women are treated differently in AI", ['model1', 'model2']), {'model1': 'gender_bias', 'model2': 'gender_bias'}),
+    ("analyze_bias", ("Older employees are ignored in hiring", ['model2', 'model4']), {'model2': 'age_bias', 'model4': 'age_bias'}),
+    ("analyze_bias", ("All religions are equal", ['model5']), {'model5': 'no_bias'}),
+    ("analyze_bias", ("This AI favors young people", ['model3', 'model4']), {'model3': 'no_bias', 'model4': 'age_bias'}),
+    ("analyze_bias", ("The AI shows preference for Christianity", ['model5']), {'model5': 'religion_bias'}),
+

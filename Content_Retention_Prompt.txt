@@ -1,0 +1,30 @@
+Prompt:
+Write a Python module named `context_manager_advanced` that manages conversation context for a chat AI terminal.
+The module should provide the following functions:
+
+1. add_message(text: str, role: str) -> None
+   - Adds a message to conversation history.
+   - role can be "user" or "assistant".
+   - Automatically summarize older messages if total message count exceeds 50.
+
+2. get_context(max_tokens: int = 1000) -> str
+   - Returns the conversation context as a single string, prioritizing latest messages.
+   - Includes AI-generated summary of older messages to fit within max_tokens.
+
+3. reset_context() -> None
+   - Clears the conversation history and stored summary.
+
+Requirements:
+- Store messages in memory and persist them to a JSON file.
+- Use AI (OpenAI GPT) to summarize older messages intelligently.
+- Keep API compatible with previous context_manager (i.e., same function names).
+- Return only valid Python code.
+
+Test Cases:
+ ("add_message", ("Hello AI!", "user"), None),
+    ("add_message", ("Hi there!", "assistant"), None),
+    ("get_context", (), "Hello AI! Hi there!"),  # simple retrieval
+    # Reset test
+    ("reset_context", (), None),
+    ("get_context", (), ""),  # after reset, context should be empty
+
