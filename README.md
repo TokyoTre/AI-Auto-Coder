@@ -65,6 +65,7 @@ def reverse_string(s: str) -> str:
 - Deploy as a web-based or CLI tool.
 
 📜 License:
+
 © 2025 Samuel Montgomery III. All rights reserved.
 
 The AI Auto Coder and all associated code, modules, documentation, and assets
